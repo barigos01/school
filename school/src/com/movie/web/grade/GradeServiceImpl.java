@@ -1,10 +1,12 @@
 package com.movie.web.grade;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class GradeServiceImpl implements GradeService {
 	// 멤버 필드
 	ArrayList<GradeBean> gradeList;
+	GradeDAO dao = new GradeDAOImpl();
 
 	public GradeServiceImpl() {
 		gradeList = new ArrayList<GradeBean>(); // 초기화(초기화는 메서드에서!)
@@ -23,58 +25,34 @@ public class GradeServiceImpl implements GradeService {
 	}
 
 	@Override
-	public ArrayList<GradeBean> getList() {
+	public ArrayList<GradeMemberBean> getList() {
 		// R : 성적표 리스트 출력
-		return gradeList;		
+		return dao.selectAll();		
 	}
 
 	@Override
-	public GradeBean getGradeByHak(int hak) {
+	public GradeMemberBean getGradeByHak(int hak) {
 		// R : 성적표 조회(학번)
-		GradeBean tempGrade = new GradeBean();
-		
-		for (int i = 0; i < gradeList.size(); i++) {
-			int searchHak = gradeList.get(i).getHak();	// 벡터
-			
-			if (searchHak == hak) {
-				tempGrade = gradeList.get(i);
-				break;
-			}
-		}
-		return tempGrade;
+		return dao.selectGradeByHak(hak);
 	}
 
 	@Override
-	public ArrayList<GradeBean> getGradeByName(String name) {
+	public ArrayList<GradeMemberBean> getGradeByName(String name) {
 		// R : 성적표 조회(이름)
-		ArrayList<GradeBean> tempList = new ArrayList<GradeBean>();
-		
-		for (int i = 0; i < gradeList.size(); i++) {
-			if (name.equals(gradeList.get(i).getId())) {
-				tempList.add(gradeList.get(i));
-			}
-		}
-		
-		return tempList;
+		return dao.selectGradeByName(name);
 	}
 
 	@Override
 	public int getCount() {
 		// R : 카운트 조회
-		return gradeList.size();
-	}
-
-	@Override
-	public void getCountByName() {
-		// R : 이름 조회시 카운트 조회
-
+		return dao.count();
 	}
 
 	@Override
 	public String update(GradeBean grade) {
 		// U 성적표 수정	      
 		String temp = "수정 실패";
-		GradeBean searchedGrade = getGradeByHak(grade.getHak());
+		/*GradeBean searchedGrade = getGradeByHak(grade.getHak());
 
 		if( gradeList.contains(searchedGrade) ){
 		
@@ -84,15 +62,15 @@ public class GradeServiceImpl implements GradeService {
 			searchedGrade.setSpring (grade.getSpring());
 
 			temp = "수정 성공";
-		}
+		}*/
 		
 		return temp;
 	}
 
 	@Override
-	public String delete(int hak) {
+	public GradeMemberBean delete(int hak) {
 		// D : 성적표 삭제
-		return (gradeList.remove(getGradeByHak(hak))) ? "삭제 성공" : "삭제 실패";
+		return dao.delete(hak);
 	}
 
 }
