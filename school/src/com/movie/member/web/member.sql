@@ -15,6 +15,5 @@ INSERT INTO Member(id, name, password, addr, birth) VALUES('song', '송중기', 
 INSERT INTO Member VALUES('yoon', '윤', '1', '인천', 750505);
 
 SELECT * FROM Member;
-
 SELECT * FROM Member WHERE id = 'kim';
 

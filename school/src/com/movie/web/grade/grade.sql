@@ -1,0 +1,17 @@
+CREATE TABLE Grade(
+	hak NUMBER PRIMARY KEY,
+	id VARCHAR2(30) NOT NULL,
+	java NUMBER,
+	sql NUMBER,
+	jsp NUMBER,
+	spring NUMBER
+);
+
+INSERT INTO Grade VALUES(1001,'hong', 100, 90, 100, 90);
+INSERT INTO Grade VALUES(2002,'kim', 90, 80, 90, 80);
+INSERT INTO Grade VALUES(3003,'lee', 80, 70, 80, 70);
+INSERT INTO Grade VALUES(4004,'song', 70, 80, 90, 100);
+INSERT INTO Grade VALUES(5005,'yoon', 60, 50, 90, 70);
+
+SELECT * FROM Grade;
+SELECT * FROM Grade WHERE id = 'kim';

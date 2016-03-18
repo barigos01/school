@@ -50,7 +50,7 @@ public class GradeServiceImpl implements GradeService {
 		ArrayList<GradeBean> tempList = new ArrayList<GradeBean>();
 		
 		for (int i = 0; i < gradeList.size(); i++) {
-			if (name.equals(gradeList.get(i).getName())) {
+			if (name.equals(gradeList.get(i).getId())) {
 				tempList.add(gradeList.get(i));
 			}
 		}
