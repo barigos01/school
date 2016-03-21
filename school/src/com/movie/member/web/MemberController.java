@@ -1,46 +1,60 @@
 package com.movie.member.web;
 
-import java.util.Scanner;
+import java.io.IOException;
 
-public class MemberController {
-	public static void main(String[] args) {
-		MemberService service = new MemberServiceImpl();
-		Scanner s = new Scanner(System.in);
-		
-		while(true){
-			System.out.println("[메뉴] 1.회원가입 2.로그인 3.본인정보보기 4.본인정보수정 5.회원탈퇴 0.종료");
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-			switch (s.nextInt()) {
-			case 1:	
-				System.out.println("아이디, 비밀번호, 이름, 생년월일, 주소 입력");
-				service.join(new MemberBean(s.next(), s.next(), s.next(), s.nextInt(), s.next()));
-				break;
-			case 2:	
-				System.out.println("아이디, 비밀번호 입력");
-				System.out.println(service.login(s.next(), s.next()));
-				break;
-			case 3:	
-				System.out.println("아이디 입력");
-				System.out.println(service.detail(s.next()));
+import com.movie.web.global.Command;
+import com.movie.web.global.CommandFactory;
 
-				break;
-			case 4:	
-				System.out.println("수정하려는 아이디, 비밀번호, 이름, 생년월일, 주소를 입력하세요");
-				String id = s.next();
-				System.out.println(service.update(new MemberBean(id, s.next(), s.next(), s.nextInt(), s.next())));
-				break;
-			case 5:	
-				System.out.println("아이디 입력");
-				System.out.println(service.remove(s.next()));
-				break;
-			case 0:	
-				System.out.println("시스템 종료");
-				return;
+@WebServlet({"/member/login_form.do","/member/join_form.do","/member/join.do"}) //web.xml
+public class MemberController extends HttpServlet {
+   private static final long serialVersionUID = 1L;
 
-			default:
-				System.out.println("잘못입력");
-				return;
-			}
+   // 페이지 이동시에는 doGet
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      
+         System.out.println("인덱스에서 들어옴");
+         String path = request.getServletPath();
+         String temp = path.split("/")[2];		// login_form 또는 join_form
+         
+         String directory= path.split("/")[1];	// member
+         String action= temp.split("\\.")[0];
+         if (action.equals("join")) {
+			String id = request.getParameter("id");
+			System.out.println("아이디 = " + id);
 		}
-	}
+         
+         
+         System.out.println("action =" + action);
+         //arr[1] = temp3.substring(0, temp3.indexOf("."));
+         Command command = CommandFactory.createCommand(directory, action);
+         
+         switch (command.getAction()) {
+         case "login_form":
+            RequestDispatcher dis = request.getRequestDispatcher(CommandFactory.getCommand(request, response).getView());
+            dis.forward(request, response);
+            break;
+         case "join_form":
+            RequestDispatcher dis2 = request.getRequestDispatcher(CommandFactory.getCommand(request, response).getView());
+            dis2.forward(request, response);
+            break;
+         
+         default:
+            break;
+         }
+      //   RequestDispatcher dis = request.getRequestDispatcher(new Command(doProc(request, response)[0], doProc(request, response)[1]).getView());
+         
+   }
+
+   protected void doPost(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+
+   }
+
 }
