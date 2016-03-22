@@ -2,6 +2,8 @@ package com.movie.member.web;
 
 import java.util.HashMap;
 
+import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
+
 public class MemberServiceImpl implements MemberService{
 	HashMap<String, MemberBean> map;
 	MemberDAOImpl dao = new MemberDAOImpl();
@@ -17,32 +19,19 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public String login(String id, String password) {
+	public MemberBean login(String id, String password) {
 		// 로그인
 		/* 아이디가 존재하지않아서 실패한 경우와 
 		 * 비번이 틀려서 실패한 경우에 따라서 메세지를 전달해야 함
 		 * */
-		String result = "";
+		MemberBean member = new MemberBean();
+		member = dao.selectMember(id);
 		
-		if (map.containsKey(id)) {
-			if (map.get(id).getPassword().equals(password)) {
-				result = "로그인 성공";
-			} else{
-				result = "비밀번호 틀림";
-			}
-		} else{
-			result = "아이디가 없음";
+		if (member.getPassword().equals(password)) {
+			return member;
+		} else {
+			return null;
 		}
-		
-/*		if (map.get(id).getId().equals(id) && map.get(id).getPassword().equals(password)) {
-			result = "로그인 성공";
-		} else if (! map.get(id).getId().equals(id)) {
-			result = "아이디가 존재하지 않습니다";
-		} else if (! map.get(id).getPassword().equals(password)) {
-			result = "비밀번호가 틀렸습니다";
-		}*/
-		
-		return result;
 		
 	}
 	
@@ -74,6 +63,19 @@ public class MemberServiceImpl implements MemberService{
 		// 삭제
 		
 		return (map.remove(id).getId().equals(id)) ? "삭제완료" : "삭제실패" ;
+	}
+
+	@Override
+	public boolean isMember(String id) {
+		boolean member = false;
+		member = dao.isMember(id);
+		
+		if (member == true) {
+			return member;
+		} else {
+			return false;
+		}
+		
 	}
 
 }

@@ -47,7 +47,7 @@ public class MemberDAOImpl implements MemberDAO {
 			System.out.println("selectMember()에서 에러 발생");
 			e.printStackTrace();
 		}
-		System.out.println("쿼리 조회 결과: " + temp.getAddr());
+		System.out.println("쿼리 조회 결과: " + temp.getName());
 		return temp;		
 	}
 
@@ -61,6 +61,34 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberBean delete(String id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean isMember(String id) {
+		MemberBean temp = new MemberBean();
+		boolean result = false;
+		
+		try {
+			Class.forName(Constants.ORACLE_DRIVER);
+			conn = DriverManager.getConnection(Constants.ORACLE_URL, Constants.ORACLE_ID, Constants.ORACLE_PASSWORD);
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT * FROM Member WHERE id = " + "'" + id + "'");
+			
+			while(rs.next()){
+				temp.setId(rs.getString("id"));
+				temp.setName(rs.getString("name"));
+				temp.setPassword(rs.getString("password"));
+				temp.setAddr(rs.getString("addr"));
+				temp.setBirth(rs.getInt("birth"));
+				
+				result = true;
+			}
+		} catch (Exception e) {
+			System.out.println("isMember()에서 에러 발생");
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 }

@@ -20,21 +20,31 @@ public class MemberController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Command command = new Command();
-		System.out.println("인덱스에서 들어옴");
+		MemberService service = new MemberServiceImpl();
+		
+		System.out.println("인덱스에서 들어옴");		
 		
 		String path = request.getServletPath();
 		String temp = path.split("/")[2]; // login_form.do 또는 join_form.do
 		String directory = path.split("/")[1]; // member
 		String action = temp.split("\\.")[0]; // login_form 또는 join_form
+		String id = "", password = "";
 
 		switch (action) {
 		case "join":
-			String id = request.getParameter("id");
+			id = request.getParameter("id");
 			System.out.println("아이디 = " + id);
 			break;
 		case "login":
-			command = CommandFactory.createCommand(directory, "detail");
-
+			System.out.println(" = 로그인 = ");
+			System.out.println(">>" + service.isMember(request.getParameter("id")));
+			if (service.isMember(request.getParameter("id")) == true) {
+				service.login(request.getParameter("id"), request.getParameter("password"));
+				command = CommandFactory.createCommand(directory, "detail");
+			} else {
+				command = CommandFactory.createCommand(directory, "login_form");
+			}
+			
 			break;
 
 		default:

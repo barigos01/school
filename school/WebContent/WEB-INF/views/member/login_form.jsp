@@ -1,38 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:include page="../global/header.jsp" />
-<div class="mg_auto" style="width: 1000px">
-	<div>
-		<h2>로그인 화면에 들어옴</h2>
-		<!--  -->
-	</div>
-	<div>
-		<h4>아이디가 없으면, 계정을 생성하시오</h4>
-		<a href="${context}/member/join_form.do">회원가입</a>
-	</div>
-	
-	<form name="login" action="${context}/member/login.do" name="frm" method="get">
-		<table>
-			<tr>
-				<td>
-					<h3>아이디</h3>
-				</td>
-				<td>
-					<input type="text" name="id" autofocus="autofocus" required="required" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<h3>비밀번호</h3>
-				</td>
-				<td>
-					<input type="password" name="password" required="required" />
-				</td>
-			</tr>
-		</table>
-		
-		<div>
-		<input type="submit" value="로그인" />
+<jsp:include page="../global/header.jsp"/>
+	<style type="text/css">
+		#login{
+			margin-top: 5em;
+		}
+	</style>
+
+	<div id="login">
+		<div class="loginTop text-center" >
+			<img src="${context}/img/member/paper_plane.jpg" border="0" height="180px" width="230px"/>
 		</div>
-	</form>
-</div>
+		<form action="${context}/member/login.do" name="loginForm" class="form-horizontal">
+		<div class="loginCenter row" style="margin-left: 43.5%;">
+				<fieldset class="loginField">
+					<div class="form-group">
+					 	<label for="input_id" class="control-label sr-only">아이디</label>
+					 	<div class="col-sm-3">
+							<input type="text" class="form-control" id="id" name="id" placeholder="아이디를 입력하세요"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="input_pw" class="control-label sr-only">비밀번호</label>
+					 	<div class="col-sm-3">
+							<input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력하세요"/>
+						</div>
+					</div>
+				</fieldset>
+			
+		</div>
+		<div class="input_button text-center">
+			<input type="submit" id="loginButton" class="btn btn-primary" value ="로그인"/>
+			<input type="reset" id="joinButton" class="btn btn-primary" value ="취소"/>
+		</div>
+		</form>
+	</div>
 <jsp:include page="../global/footer.jsp" />

@@ -8,9 +8,10 @@ public interface MemberService {
 	
 	//public final static String NAME="홍길동";		// 상수
 	public void join(MemberBean member);
-	public String login(String id, String password);
+	public MemberBean login(String id, String password);
 	public MemberBean detail(String id);
 	public String update(MemberBean member);
 	public String remove(String id);
+	public boolean isMember(String id);
 	
 }
