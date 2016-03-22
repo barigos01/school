@@ -1,13 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="context" value="<%=request.getContextPath()%>"></c:set>
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8" />
-	<title>Document</title>
-</head>
-<body>
+<jsp:include page="../global/header.jsp" />
+<div class="mg_auto" style="width: 1000px">
 	<form name="join" action="${context}/member/join.do">
 		회원가입 폼
 		
@@ -66,5 +61,6 @@
 		<input type="submit" value="회원가입" />
 		</div>
 	</form>
+	</div>
 </body>
 </html>

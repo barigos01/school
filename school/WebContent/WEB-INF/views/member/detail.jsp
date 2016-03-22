@@ -1,17 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8" />
-	<title>Document</title>
-</head>
-<body>
-	<table>
+<jsp:include page="../global/header.jsp" />
+<div>
+	<table border=1>
 		<tr>
 			<td rowspan=4></td>
-			<td><input type="file" name="file"></td>
-		</tr>
-		<tr>
 			<td>
 				<h3>아이디</h3>
 			</td>
@@ -44,13 +36,24 @@
 			</td>
 		</tr>
 		<tr>
+		<td rowspan=2><input type="file" name="file"></td>
 			<td>
 				<h3>주소</h3>
 			</td>
+			
 			<td>
 				<input type="text" name="addr"/>
 			</td>
 		</tr>
+		
 	</table>
-</body>
-</html>
+	
+	<form action="${context}/grade/my_grade.do">
+		<input type="submit" value="내성적보기" />
+	</form>
+	
+	<form action="${context}/global/main.do">
+		<input type="submit" value="로그아웃" />
+	</form>
+</div>
+<jsp:include page="../global/footer.jsp" />
