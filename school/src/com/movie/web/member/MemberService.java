@@ -1,4 +1,4 @@
-package com.movie.member.web;
+package com.movie.web.member;
 
 public interface MemberService {
 	// 인터페이스는 추상메소드만 와야한다는 문법이 있어서
@@ -7,11 +7,11 @@ public interface MemberService {
 	// 둘을 구분하기 위해서 반드시 abstract를 붙여야 한다
 	
 	//public final static String NAME="홍길동";		// 상수
-	public void join(MemberBean member);
+	public int join(MemberBean member);
 	public MemberBean login(String id, String password);
 	public MemberBean detail(String id);
-	public String update(MemberBean member);
-	public String remove(String id);
+	public int update(MemberBean member);
+	public int remove(String id);
 	public boolean isMember(String id);
 	
 }

@@ -1,4 +1,4 @@
-package com.movie.member.web;
+package com.movie.web.member;
 
 
 import java.util.Scanner;
@@ -14,7 +14,7 @@ public class MemberMain {
 			switch (s.nextInt()) {
 			case 1:	
 				System.out.println("아이디, 비밀번호, 이름, 생년월일, 주소 입력");
-				service.join(new MemberBean(s.next(), s.next(), s.next(), s.nextInt(), s.next()));
+				System.out.println("Main 회원가입 결과 : " + service.join(new MemberBean(s.next(), s.next(), s.next(), s.nextInt(), s.next())));
 				break;
 			case 2:	
 				System.out.println("아이디, 비밀번호 입력");
