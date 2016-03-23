@@ -33,5 +33,9 @@
 			<input type="reset" id="joinButton" class="btn btn-primary" value ="취소"/>
 		</div>
 		</form>
+		<form action="${context}/member/join_form.do" class="input_button text-center">
+			<input type="submit" id="loginButton" class="btn btn-primary" value ="회원가입"/>
+		</form>
+		
 	</div>
 <jsp:include page="../global/footer.jsp" />

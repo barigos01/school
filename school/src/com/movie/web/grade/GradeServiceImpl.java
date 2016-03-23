@@ -6,7 +6,12 @@ import java.util.Map;
 public class GradeServiceImpl implements GradeService {
 	// 멤버 필드
 	ArrayList<GradeBean> gradeList;
-	GradeDAO dao = new GradeDAOImpl();
+	private static GradeService instance = new GradeServiceImpl();
+	GradeDAO dao = GradeDAOImpl.getInstance();
+	
+	public static GradeService getInstance() {
+		return instance;
+	}
 
 	public GradeServiceImpl() {
 		gradeList = new ArrayList<GradeBean>(); // 초기화(초기화는 메서드에서!)
@@ -71,6 +76,11 @@ public class GradeServiceImpl implements GradeService {
 	public GradeMemberBean delete(int hak) {
 		// D : 성적표 삭제
 		return dao.delete(hak);
+	}
+
+	@Override
+	public GradeMemberBean selectGradeById(String id) {
+		return dao.selectGradeById(id);
 	}
 
 }

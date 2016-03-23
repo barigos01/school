@@ -24,4 +24,6 @@ public interface GradeDAO {
 	
 	// D : 성적표 삭제
 	public GradeMemberBean delete(int hak); 
+	
+	public GradeMemberBean selectGradeById(String id);
 }

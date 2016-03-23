@@ -30,6 +30,8 @@ public interface GradeService {
 	public String update(GradeBean grade);
 	
 	// D : 성적표 삭제
-	public GradeMemberBean delete(int hak); 
+	public GradeMemberBean delete(int hak);
+	
+	public GradeMemberBean selectGradeById(String id);
 	
 }
