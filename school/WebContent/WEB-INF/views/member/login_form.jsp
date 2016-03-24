@@ -10,7 +10,7 @@
 		<div class="loginTop text-center" >
 			<img src="${context}/img/member/paper_plane.jpg" border="0" height="180px" width="230px"/>
 		</div>
-		<form action="${context}/member/login.do" name="loginForm" class="form-horizontal">
+		<form action="${context}/member/login.do" name="loginForm" method="post" class="form-horizontal">
 		<div class="loginCenter row" style="margin-left: 43.5%;">
 				<fieldset class="loginField">
 					<div class="form-group">

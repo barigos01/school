@@ -21,9 +21,8 @@ public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	MemberService service = MemberServiceImpl.getInstance();
 
-	// 페이지 이동시에는 doGet
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Command command = new Command();
 		MemberBean member = new MemberBean();
 		
@@ -51,39 +50,6 @@ public class MemberController extends HttpServlet {
 			}
 			break;
 			
-		case "update_form":
-			System.out.println("=== 수정 폼으로 진입 ===");
-			request.setAttribute("member", service.detail(request.getParameter("id")));
-			command = CommandFactory.createCommand(str[0], str[1]);
-			break;
-			
-		case "delete" : 
-			if (service.remove(request.getParameter("id")) == 1) {
-				command = CommandFactory.createCommand(str[0], "login_form");
-			} else {
-				request.setAttribute("member", service.detail(request.getParameter("id")));
-				command = CommandFactory.createCommand(str[0], "detail");
-			}
-			break;
-
-		default:
-			command = CommandFactory.createCommand(str[0], str[1]);
-			break;
-		}
-
-		System.out.println("action =" + str[1]);
-		
-		DispatcherServlet.dispatcher(request, response, command.getView());
-
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		Command command = new Command();
-		MemberBean member = new MemberBean();
-		String[] str = Seperator.doSomething(request);
-		
-		switch (str[1]) {
 		case "join":
 			member.setId(request.getParameter("id"));
 			member.setName(request.getParameter("name"));
@@ -113,10 +79,29 @@ public class MemberController extends HttpServlet {
 				command = CommandFactory.createCommand(str[0],"update_form");
 			}
 			break;
+			
+		case "update_form":
+			System.out.println("=== 수정 폼으로 진입 ===");
+			request.setAttribute("member", service.detail(request.getParameter("id")));
+			command = CommandFactory.createCommand(str[0], str[1]);
+			break;
+			
+		case "delete" : 
+			if (service.remove(request.getParameter("id")) == 1) {
+				command = CommandFactory.createCommand(str[0], "login_form");
+			} else {
+				request.setAttribute("member", service.detail(request.getParameter("id")));
+				command = CommandFactory.createCommand(str[0], "detail");
+			}
+			break;
+
+		default:
+			command = CommandFactory.createCommand(str[0], str[1]);
+			break;
 		}
-		
+
+		System.out.println("action =" + str[1]);
 		
 		DispatcherServlet.dispatcher(request, response, command.getView());
 	}
-
 }
