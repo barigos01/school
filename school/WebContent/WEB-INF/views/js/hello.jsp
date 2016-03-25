@@ -2,7 +2,7 @@
 <jsp:include page="../global/header.jsp"></jsp:include>
 <div class="container" style="width: 1000px; margin: 0 auto;">
 	<div>
-		JS란?<br/>
+		<h3>JS란?</h3>
 		자바스크립트는 객체 기반의 스크립트 프로그래밍 언어이다. <br/>
 		JS는 본래 넷스케이프 회사의 브랜던 아이크가 처음에는 '모카 스크립트'라는 <br/>
 		나중에는 '라이브 스크립트'라는 이름으로 개발하였다. <br/>
@@ -10,7 +10,7 @@
 		※ 자바 출시 이후 이슈하되면서 마케팅의 일환
 	</div>
 	<div style="margin-top: 20px">
-		JS의 특징
+		<h3>JS의 특징</h3>
 		<ul>
 			<li>서버가 아닌 클라이언트에서 인터프리터 언어</li>
 			<li>객체지향형 언어</li>
@@ -19,7 +19,7 @@
 		</ul>
 	</div>
 	<div style="margin-top: 20px">
-		JS의 구성
+		<h3>JS의 구성</h3>
 		<ul>
 			<li>
 				기본 문법

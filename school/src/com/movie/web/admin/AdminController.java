@@ -17,12 +17,13 @@ import com.movie.web.grade.GradeMemberBean;
 /**
  * Servlet implementation class AdminController
  */
-@WebServlet("/grade/grade_list.do")
+@WebServlet("/admin/admin_form.do")
 public class AdminController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	AdminService service = AdminServiceImpl.getInstance();
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Command command = new Command();
 		GradeMemberBean gm = new GradeMemberBean();
 		
@@ -31,10 +32,10 @@ public class AdminController extends HttpServlet {
 		String[] str = Seperator.doSomething(request);
 		
 		switch (str[1]) {
-		case "grade_list":
+		case "admin_form":
 			System.out.println(" = 학생 성적 목록 = ");
 			request.setAttribute("admin", service.getMemberList());
-			command = CommandFactory.createCommand(str[0], "grade_list");
+			command = CommandFactory.createCommand(str[0], "admin_form");
 			break;
 
 		default:
@@ -43,11 +44,6 @@ public class AdminController extends HttpServlet {
 		
 		System.out.println("action= " + str[1]);
 		DispatcherServlet.dispatcher(request, response, command.getView());
-		
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 	}
 
 }
