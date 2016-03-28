@@ -6,10 +6,14 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>메인화면</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 </head>
 <body>
-	<a href="${context}/member/login_form.do">로그인 이동</a><br>
-	<a href="${context}/member/join_form.do">회원가입 이동</a><br>
-	<a href="${context}/grade/grade_list.do">관리자 이동</a>
+	<img src="${context}/img/main/index.gif" id="image" style="margin-left: 30%;"><br/>
 </body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		location.href = '${context}/global/main.do';
+	})
+</script>
 </html>

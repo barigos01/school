@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.movie.web.global.Command;
 import com.movie.web.global.CommandFactory;
@@ -16,7 +17,8 @@ import com.movie.web.global.Seperator;
 
 import sun.rmi.server.Dispatcher;
 
-@WebServlet({ "/member/login_form.do", "/member/join_form.do", "/member/join.do", "/member/login.do", "/member/update_form.do", "/member/update.do", "/member/delete.do" }) // web.xml
+@WebServlet({ "/member/login_form.do", "/member/join_form.do", "/member/join.do", "/member/login.do", 
+				"/member/update_form.do", "/member/update.do", "/member/delete.do" }) // web.xml
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	MemberService service = MemberServiceImpl.getInstance();
@@ -25,6 +27,7 @@ public class MemberController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Command command = new Command();
 		MemberBean member = new MemberBean();
+		HttpSession session = request.getSession();
 		
 		System.out.println("***** 인덱스에서 들어옴 *****");
 
@@ -43,11 +46,17 @@ public class MemberController extends HttpServlet {
 				}else{
 					System.out.println("로그인 성공");
 					request.setAttribute("member", member);
+					session.setAttribute("user", member);
 					command = CommandFactory.createCommand(str[0],"detail");
 				}
 			} else {
 				command = CommandFactory.createCommand(str[0], "login_form");
 			}
+			break;
+			
+		case "logout":
+			session.invalidate();
+			command = CommandFactory.createCommand(str[0],"login_form");
 			break;
 			
 		case "join":
@@ -72,7 +81,7 @@ public class MemberController extends HttpServlet {
 			member.setBirth(Integer.parseInt(request.getParameter("birth")));
 			
 			if (service.update(member)==1) {
-				request.setAttribute("member", service.detail(request.getParameter("id")));
+				session.setAttribute("user", service.detail(request.getParameter("id")));
 				command = CommandFactory.createCommand(str[0],"detail");
 			}else{
 				request.setAttribute("member", service.detail(request.getParameter("id")));
@@ -90,7 +99,6 @@ public class MemberController extends HttpServlet {
 			if (service.remove(request.getParameter("id")) == 1) {
 				command = CommandFactory.createCommand(str[0], "login_form");
 			} else {
-				request.setAttribute("member", service.detail(request.getParameter("id")));
 				command = CommandFactory.createCommand(str[0], "detail");
 			}
 			break;
@@ -100,7 +108,7 @@ public class MemberController extends HttpServlet {
 			break;
 		}
 
-		System.out.println("action =" + str[1]);
+		System.out.println("action= " + str[1]);
 		
 		DispatcherServlet.dispatcher(request, response, command.getView());
 	}

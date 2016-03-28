@@ -5,13 +5,14 @@
 	    <div class="col-xs-12 col-sm-4 display-cell" >
 		    <ul class="nav nav-pills nav-stacked">
 		    	<li class="dropdown active"><a onclick="opr.sysout()">배열출력</a></li>
-		    	<li class="dropdown active"><a onclick="opr.score()">어벤저스</a>	</li>
+		    	<li class="dropdown active"><a onclick="opr.score()">어벤저스</a></li>
 		    	<li class="dropdown active"><a onclick="opr.grade()">성적계산기</a></li>
 		    	<li class="dropdown active"><a onclick="opr.gender()">성별 구분하기</a></li>
 		    	<li class="dropdown active"><a onclick="opr.bigNum()">최대수 판별</a></li>
 		    	<li class="dropdown active"><a onclick="opr.gugudan()">구구단</a></li>
 		    	<li class="dropdown active"><a onclick="opr.sum1to100()">1부터 100까지 합</a></li>
 		    	<li class="dropdown active"><a onclick="opr.oddSum()">짝수합, 홀수합</a></li>
+		    	<li class="dropdown active"><a onclick="liveScript()">자바스크립트 호출</a></li>
 		    </ul>
 	    </div>
 	    <div class="col-xs-12 col-sm-8 display-cell" id="result" style="border: 1px solid black;height: 500px">
@@ -20,6 +21,10 @@
 	</div>
 </div>
 <script type="text/javascript">
+function liveScript() {
+	alert('라이브스크립트 시절(객체기반언어가 아닌 시절)은 이렇게 했답니다.');
+}
+
 var opr = {
 	sysout : function(){
 		var arr = ['사과', '배', '감', '귤'];

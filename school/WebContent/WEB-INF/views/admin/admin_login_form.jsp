@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:include page="member_header.jsp"/>
+<jsp:include page="admin_header.jsp"/>
 	<style type="text/css">
 		#login{
 			margin-top: 5em;
@@ -7,11 +7,8 @@
 	</style>
 
 	<div id="login">
-		<div class="loginTop text-center" >
-			<img src="${context}/img/member/paper_plane.jpg" id="paper_plane" border="0" />
-		</div>
 		<br/>
-		<form name="loginForm" class="form-horizontal">
+		<form name="admin_login" class="form-horizontal">
 			<div class="loginCenter row" style="margin-left: 43.5%;">
 				<fieldset class="loginField">
 					<div class="form-group">
@@ -36,11 +33,9 @@
 	</div>
 <script>
 	$(function() {
-		$('#paper_plane').css('border','0').css('height','160px').css('width','160px');	
-		$('#loginButton').css('width','150px');
 		$('#loginButton').click(function() {
-			$('form').attr('action','${context}/member/login.do').attr('method','post').submit();
-		});
-	});
+			$('form').attr('action','${context}/admin/admin_login.do').attr('method','post').submit();
+		})
+	})
 </script>
 <jsp:include page="../global/footer.jsp" />
