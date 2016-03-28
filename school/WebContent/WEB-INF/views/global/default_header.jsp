@@ -13,11 +13,11 @@
 <body>
 <c:choose>
 	<c:when test="empty sessionScope.user">
-		<jsp:include page="../member/member_header.jsp"/>
+		<jsp:include page="../global/default_header.jsp"/>
 	</c:when>
 </c:choose>
 <c:choose>
-	<c:when test="${user.level = 'admin'}">
+	<c:when test="${user.level eq 'admin'}">
 		<jsp:include page="../admin/admin_header.jsp"/>
 	</c:when>
 	<c:otherwise>

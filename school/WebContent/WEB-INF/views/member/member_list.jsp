@@ -2,26 +2,24 @@
 <div id="grade_list">
 	<div class="joinCenter row">
 		<form action="${context}/grade/grade_list.do" name="grade_list" class="form-horizontal">
+		<h3 style="text-align: center">회원 정보 목록</h3>
+		<br/>
 			<table border=1 align="center" style="width: 90%; text-align: center">
 				<tr>
-					<td>시험번호</td>
 					<td>아이디</td>
 					<td>이름</td>
-					<td>자바</td>
-					<td>SQL</td>
-					<td>JSP</td>
-					<td>스프링</td>
+					<td>비밀번호</td>
+					<td>주소</td>
+					<td>생년월일</td>
 				</tr>
 				
-				<c:forEach var="score_list" items="${admin}">
+				<c:forEach var="member_list" items="${admin}">
 					<tr>
-						<td>${score_list.score_seq}</td>
-						<td>${score_list.id}</td>
-						<td>${score_list.name}</td>
-						<td>${score_list.java}</td>
-						<td>${score_list.sql}</td>
-						<td>${score_list.jsp}</td>
-						<td>${score_list.spring}</td>
+						<td>${member_list.id}</td>
+						<td>${member_list.name}</td>
+						<td>${member_list.password}</td>
+						<td>${member_list.addr}</td>
+						<td>${member_list.birth}</td>
 					</tr>
 				</c:forEach>
 			</table>
