@@ -18,7 +18,7 @@ import com.movie.web.global.Seperator;
 import sun.rmi.server.Dispatcher;
 
 @WebServlet({ "/member/login_form.do", "/member/join_form.do", "/member/join.do", "/member/login.do", 
-				"/member/update_form.do", "/member/update.do", "/member/delete.do" }) // web.xml
+				"/member/update_form.do", "/member/update.do", "/member/delete.do", "/member/logout.do" }) // web.xml
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	MemberService service = MemberServiceImpl.getInstance();

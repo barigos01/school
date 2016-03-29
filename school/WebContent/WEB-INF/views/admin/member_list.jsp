@@ -16,7 +16,7 @@
 				<c:forEach var="member_list" items="${list}">
 					<tr>
 						<td>${member_list.id}</td>
-						<td>${member_list.name}</td>
+						<td><a href="${context}/grade/add_form.do?id=${member_list.id}">${member_list.name}</a></td>
 						<td>${member_list.password}</td>
 						<td>${member_list.addr}</td>
 						<td>${member_list.birth}</td>

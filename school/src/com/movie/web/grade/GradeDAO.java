@@ -26,4 +26,6 @@ public interface GradeDAO {
 	public GradeMemberBean delete(int hak); 
 	
 	public GradeMemberBean selectGradeById(String id);
+	
+	public int insertGrade(GradeBean grade);
 }

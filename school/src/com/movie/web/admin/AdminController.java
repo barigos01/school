@@ -18,7 +18,8 @@ import com.movie.web.grade.GradeMemberBean;
 /**
  * Servlet implementation class AdminController
  */
-@WebServlet({"/admin/admin_form.do", "/admin/admin_login_form.do","/admin/admin_login.do"})
+@WebServlet({"/admin/admin_form.do", "/admin/login_form.do", "/admin/login.do", "/admin/member_list.do", 
+				"/admin/grade_list.do"})
 public class AdminController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	AdminService service = AdminServiceImpl.getInstance();
@@ -35,22 +36,24 @@ public class AdminController extends HttpServlet {
 		String[] str = Seperator.doSomething(request);
 		
 		switch (str[1]) {
-		case "admin_login_form":
+		case "login_form":
 			System.out.println(" = 관리자 로그인 폼 = ");
-			command = CommandFactory.createCommand(str[0], "admin_login_form");
+			command = CommandFactory.createCommand(str[0], "login_form");
 			break;
 		
-		case "admin_login":
-			System.out.println(" = 로그인 = ");
-			admin = service.selectAdmin(request.getParameter("id"), request.getParameter("password"));
+		case "login" :
+			System.out.println("관리자 로그인 진입");
+			admin.setId(request.getParameter("id"));
+			admin.setPassword(request.getParameter("password"));
+			AdminBean temp = service.selectAdmin(admin);
 			
-			if (admin == null) {
-				command = CommandFactory.createCommand(str[0],"admin_login_form");
+			if (temp.getId() == null) {
+				System.out.println("관리자 로그인 실패");
+				command = CommandFactory.createCommand(str[0], "login_form");
 			} else {
-				System.out.println("로그인 성공");
-				request.setAttribute("admin", admin);
-				session.setAttribute("user", admin);
-				command = CommandFactory.createCommand(str[0],"admin_form");
+				System.out.println("관리자 로그인 성공");
+				session.setAttribute("admin", temp);
+				command = CommandFactory.createCommand(str[0], "admin_form");
 			}
 			break;
 			
@@ -62,12 +65,12 @@ public class AdminController extends HttpServlet {
 		case "member_list":
 			System.out.println(" = 학생 정보 목록 = ");
 			request.setAttribute("list", service.getMemberList());
-			command = CommandFactory.createCommand(str[0], "admin_form");
+			command = CommandFactory.createCommand(str[0], "member_list");
 			break;
 			
 		case "grade_list":
 			System.out.println(" = 학생 성적 목록 = ");
-			request.setAttribute("admin", service.getMemberList());
+			request.setAttribute("admin", service.getGradeList());
 			command = CommandFactory.createCommand(str[0], "grade_list");
 			break;
 

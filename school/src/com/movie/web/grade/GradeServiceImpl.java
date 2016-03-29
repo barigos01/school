@@ -83,4 +83,10 @@ public class GradeServiceImpl implements GradeService {
 		return dao.selectGradeById(id);
 	}
 
+	@Override
+	public int insertGrade(GradeBean grade) {
+		// TODO Auto-generated method stub
+		return dao.insertGrade(grade);
+	}
+
 }

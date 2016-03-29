@@ -24,17 +24,17 @@ public class AdminServiceImpl implements AdminService {
 		return dao.getGradeList();
 	}
 
-
 	@Override
 	public int addScore(GradeBean bean) {
 		return 0;
 	}
 
 	@Override
-	public AdminBean selectAdmin(String id, String password) {
-		return dao.selectAdmin(id, password);
+	public AdminBean selectAdmin(AdminBean admin) {
+		AdminBean bean = new AdminBean();
+		bean = dao.selectAdmin(admin);
+		
+		return bean;
 	}
-
-
 
 }

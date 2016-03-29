@@ -14,4 +14,5 @@ public interface MemberService {
 	public int remove(String id);
 	public boolean isMember(String id);
 	
+	
 }

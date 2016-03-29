@@ -34,4 +34,6 @@ public interface GradeService {
 	
 	public GradeMemberBean selectGradeById(String id);
 	
+	public int insertGrade(GradeBean grade);
+	
 }

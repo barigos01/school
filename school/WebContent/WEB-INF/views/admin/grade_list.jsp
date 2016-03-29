@@ -2,6 +2,8 @@
 <div id="grade_list">
 	<div class="joinCenter row">
 		<form action="${context}/grade/grade_list.do" name="grade_list" class="form-horizontal">
+		<h3 style="text-align: center">회원 성적 목록</h3>
+		<br/>
 			<table border=1 align="center" style="width: 90%; text-align: center">
 				<tr>
 					<td>시험번호</td>

@@ -10,5 +10,5 @@ public interface AdminService {
 	public List<MemberBean> getMemberList();
 	public List<GradeMemberBean> getGradeList();
 	public int addScore(GradeBean bean);
-	public AdminBean selectAdmin(String id, String password);
+	public AdminBean selectAdmin(AdminBean admin);
 }
